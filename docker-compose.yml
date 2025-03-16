@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  soliscloud_api:
+    container_name: soliscloud_api
+    image: soliscloud_api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./config.json:/app/config.json       # Bind config.json
+      - ./:/app                              # Bind whole project folder
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
